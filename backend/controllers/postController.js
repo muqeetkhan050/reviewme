@@ -1,4 +1,4 @@
-const post=require('../models/Post.js');
+const post=require('../models/Post');
 
 
 exports.createPost=async(req,res)=>{
