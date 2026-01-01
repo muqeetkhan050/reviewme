@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useEffect } from "react";
+
 
 const Tweet = () => {
   const [likes, setLikes] = useState(0);
