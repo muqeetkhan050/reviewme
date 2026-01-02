@@ -1,9 +1,31 @@
-import { useState } from "react";
-import { useEffect } from "react";
 
+
+import { useState } from "react";
+import axios from "axios"; // ✅ Import axios
 
 const Tweet = () => {
   const [likes, setLikes] = useState(0);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  // Submit tweet to backend
+  const submitTweet = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post("http://localhost:5000/reviewme/tweet", {
+        title,
+        content,
+      });
+
+      setTitle("");
+      setContent("");
+      alert("Tweet posted!");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to post tweet");
+    }
+  };
 
   return (
     <div style={styles.card}>
@@ -16,10 +38,52 @@ const Tweet = () => {
         <span style={styles.time}>· 2m</span>
       </div>
 
-      {/* Content */}
+      {/* Tweet Form */}
+      <form onSubmit={submitTweet} style={{ marginBottom: "12px" }}>
+        <input
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "6px",
+            marginBottom: "6px",
+            borderRadius: "6px",
+            border: "1px solid #ccc",
+          }}
+          required
+        />
+        <textarea
+          placeholder="What's happening?"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "6px",
+            borderRadius: "6px",
+            border: "1px solid #ccc",
+          }}
+          required
+        />
+        <button
+          type="submit"
+          style={{
+            marginTop: "6px",
+            padding: "6px 12px",
+            borderRadius: "6px",
+            border: "none",
+            background: "#1da1f2",
+            color: "#fff",
+            cursor: "pointer",
+          }}
+        >
+          Tweet
+        </button>
+      </form>
+
+      {/* Content Preview */}
       <p style={styles.text}>
-        Building a MERN app 🚀  
-        Simple tweets, real users, clean code.
+        {content || "Building a MERN app 🚀  Simple tweets, real users, clean code."}
       </p>
 
       {/* Actions */}
