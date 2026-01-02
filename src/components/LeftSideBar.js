@@ -1,23 +1,30 @@
 import { Bell, MessageCircle, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const LeftSidebar = () => {
+
+  const navigate = useNavigate();
   return (
     <div style={styles.sidebar}>
       <div style={styles.logo}>ReviewMe</div>
 
       <NavItem icon={<Bell />} label="Notifications" />
       <NavItem icon={<MessageCircle />} label="Chat" />
-      <NavItem icon={<User />} label="Profile" />
+      <NavItem
+        icon={<User />}
+        label="Profile"
+        onClick={() => navigate("/Profile")}
+      />
     </div>
   );
 };
 
-const NavItem = ({ icon, label }) => {
+const NavItem = ({ icon, label, onClick }) => {
   return (
-    <div style={styles.navItem}>
+    <button onClick={onClick} style={styles.navItem}>
       {icon}
-      <span style={styles.text}>{label}</span>
-    </div>
+      <span>{label}</span>
+    </button>
   );
 };
 
