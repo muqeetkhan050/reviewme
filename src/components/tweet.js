@@ -13,7 +13,7 @@ const Tweet = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/reviewme/tweet", {
+      await axios.post("http://localhost:5000/reviewme/posts/new", {
         title,
         content,
       });

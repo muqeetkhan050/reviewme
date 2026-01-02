@@ -1,6 +1,6 @@
 
 
-import Tweet from '../components/tweet';
+import Tweet from '../components/Tweet';
 import LeftSidebar from '../components/LeftSideBar';
 import ProfilePage from '../pages/ProfilePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
