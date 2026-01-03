@@ -1,15 +1,19 @@
-// backend/models/Post.js
-const mongoose = require('mongoose');
 
-const postSchema = new mongoose.Schema({
+
+const mongoose = require("mongoose");
+
+const postSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
     content: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     }
-});
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model("Post", postSchema);
