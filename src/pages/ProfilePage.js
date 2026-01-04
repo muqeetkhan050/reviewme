@@ -48,7 +48,6 @@ const ProfilePage = () => {
       <div className="tweets">
         {tweets.map((tweet) => (
           <div className="tweet" key={tweet.id}>
-            <button>Upvote</button>
             <p>{tweet.text}</p>
             <span>{tweet.time}</span>
           </div>

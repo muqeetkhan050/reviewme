@@ -6,7 +6,7 @@ const connectDB = async () => {
     try {
         console.log('🔗 Connecting to MongoDB Atlas...');
         
-        // For Mongoose v9, just pass the URI - NO options needed
+
         await mongoose.connect(process.env.MONGO_URI);
         
         console.log('✅ MongoDB connected successfully!');

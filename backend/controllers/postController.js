@@ -8,7 +8,6 @@ exports.createPost = async (req, res) => {
     console.log("📥 BODY RECEIVED:", req.body);
     console.log("✅ POST SAVED:", postData);
 
-    // After saving, fetch all posts to send back to frontend
     const allPosts = await Post.find().sort({ createdAt: -1 });
 
     res.status(201).json({
