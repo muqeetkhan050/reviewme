@@ -5,7 +5,10 @@ import Tweet from "../components/Tweet";
 import Feed from "../components/Feed";
 import LeftSidebar from "../components/LeftSideBar";// placeholder sidebar
 import Login from "./Login";
-
+import { HeroUIProvider } from "@heroui/react";
+import Signup from "./Signup";
+import WhoToFollow from "../components/WhoToFollow";
+import OnlineFriends from "../components/OnlineFriends";
 function MainPage() {
   const [posts, setPosts] = useState([]);
 
@@ -49,11 +52,17 @@ function MainPage() {
     >
       <Tweet refreshPosts={fetchPosts} />
       <Feed posts={posts} />
-      <Login/>
+      <OnlineFriends/>
+         <HeroUIProvider>
+    <Login/>
+    </HeroUIProvider>
+    <Signup/>
+      
     </div>
   </div>
 
   <div style={{ width: "250px" }} />
+  <WhoToFollow/>
 </div>
   );
 }
