@@ -1,14 +1,29 @@
-
-import './App.css';
-
-import MainPage from './pages/MainPage';
-
+import { Routes, Route } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
   return (
-    <div>
-      <MainPage />
-    </div>
+    <Routes>
+      {/* Public routes */}
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+
+      {/* Protected main page */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoutes>
+            <MainPage />
+          </ProtectedRoutes>
+        }
+      />
+
+      {/* Redirect any unknown routes to "/" */}
+      <Route path="*" element={<ProtectedRoutes><MainPage /></ProtectedRoutes>} />
+    </Routes>
   );
 }
 
