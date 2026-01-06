@@ -7,10 +7,13 @@ import LeftSidebar from "../components/LeftSideBar";
 import WhoToFollow from "../components/WhoToFollow";
 import OnlineFriends from "../components/OnlineFriends";
 import API from "../api";
+import { useNavigate } from "react-router-dom";  
 
 export default function MainPage() {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
+  
 
   const fetchPosts = async () => {
     try {
@@ -28,7 +31,9 @@ export default function MainPage() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    window.location.reload(); // redirect to login via ProtectedRoutes
+    setUser(null);
+    navigate("/login");
+
   };
 
   return (
