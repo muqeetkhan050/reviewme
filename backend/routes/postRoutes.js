@@ -1,10 +1,11 @@
 
 
-const express = require('express');
-const { createPost, getAllPosts } = require('../controllers/postController');
+const express = require("express");
 const router = express.Router();
+const auth = require("../middlewares/authMiddleware");
+const { createPost, getAllPosts } = require("../controllers/postController");
 
-router.get('/posts', getAllPosts);
-router.post('/posts/new', createPost);
+router.post("/posts/new", auth, createPost); // 🔐 protected
+router.get("/posts", auth, getAllPosts);
 
 module.exports = router;
