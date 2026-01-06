@@ -1,5 +1,7 @@
 import React from "react";
 import "../css/ProfilePage.css";
+import { domAnimation } from '@heroui/dom-animation';
+
 
 const ProfilePage = () => {
   // Sample tweets
