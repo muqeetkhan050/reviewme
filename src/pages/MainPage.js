@@ -1,42 +1,18 @@
-
+// src/pages/MainPage.jsx
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import Tweet from "../components/Tweet";
 import Feed from "../components/Feed";
 import LeftSidebar from "../components/LeftSideBar";
 import WhoToFollow from "../components/WhoToFollow";
 import OnlineFriends from "../components/OnlineFriends";
 import API from "../api";
-import { useNavigate } from "react-router-dom";  
 
 export default function MainPage() {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  // ✅ Get user info from token (decode it or fetch from API)
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        // Option 1: Decode token to get user info
-        const token = localStorage.getItem("token");
-        if (token) {
-          // You can decode JWT to get user data
-          // Or fetch user from API
-          const storedUser = localStorage.getItem("user");
-          if (storedUser) {
-            setUser(JSON.parse(storedUser));
-          }
-        }
-      } catch (err) {
-        console.error("Failed to get user:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, []);
 
   const fetchPosts = async () => {
     try {
@@ -44,7 +20,6 @@ export default function MainPage() {
       if (res.data.success) setPosts(res.data.posts);
     } catch (err) {
       console.error("Failed to fetch posts:", err);
-      // If 401, token expired - logout
       if (err.response?.status === 401) {
         handleLogout();
       }
@@ -52,37 +27,26 @@ export default function MainPage() {
   };
 
   useEffect(() => {
-    if (!loading) {
-      fetchPosts();
-    }
-  }, [loading]);
+    fetchPosts();
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
+    logout();
     navigate("/login");
   };
-
-  if (loading) {
-    return (
-      <div style={{ 
-        display: "flex", 
-        justifyContent: "center", 
-        alignItems: "center", 
-        height: "100vh" 
-      }}>
-        <h2>Loading...</h2>
-      </div>
-    );
-  }
 
   return (
     <div style={{ display: "flex", width: "100%" }}>
       <LeftSidebar />
 
       <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
-        <div style={{ width: "600px", display: "flex", flexDirection: "column", gap: "16px", padding: "16px" }}>
+        <div style={{ 
+          width: "600px", 
+          display: "flex", 
+          flexDirection: "column", 
+          gap: "16px", 
+          padding: "16px" 
+        }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <h2>Welcome, {user?.name || "User"}</h2>
             <button 
@@ -99,8 +63,13 @@ export default function MainPage() {
               Logout
             </button>
           </div>
+          
           <Tweet refreshPosts={fetchPosts} />
-          <Feed posts={posts} />
+          
+          {/* 🔥 FIX: Make sure to pass refreshPosts */}
+          <Feed posts={posts} refreshPosts={fetchPosts} />
+          
+          
           <OnlineFriends />
         </div>
       </div>
