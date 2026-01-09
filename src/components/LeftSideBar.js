@@ -90,6 +90,23 @@ export default function LeftSidebar() {
         </button>
 
         <button
+          onClick={() => navigate('/coming')}
+          style={{
+            padding: "12px",
+            background: "none",
+            border: "none",
+            textAlign: "left",
+            fontSize: "18px",
+            cursor: "pointer",
+            borderRadius: "8px"
+          }}
+          onMouseEnter={(e) => e.target.style.background = "#f0f0f0"}
+          onMouseLeave={(e) => e.target.style.background = "none"}
+        >
+          📋 Who is Coming
+        </button>
+
+        <button
           onClick={() => navigate(`/profile/${user?.id}`)}
           style={{
             padding: "12px",

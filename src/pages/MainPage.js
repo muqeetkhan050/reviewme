@@ -7,6 +7,7 @@ import Feed from "../components/Feed";
 import LeftSidebar from "../components/LeftSideBar";
 import WhoToFollow from "../components/WhoToFollow";
 import OnlineFriends from "../components/OnlineFriends";
+import { Button } from "../components/ui";
 import API from "../api";
 
 export default function MainPage() {
@@ -49,19 +50,7 @@ export default function MainPage() {
         }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <h2>Welcome, {user?.name || "User"}</h2>
-            <button 
-              onClick={handleLogout}
-              style={{
-                padding: "8px 16px",
-                background: "#ff4444",
-                color: "#fff",
-                border: "none",
-                borderRadius: "8px",
-                cursor: "pointer"
-              }}
-            >
-              Logout
-            </button>
+            <Button variant="destructive" onClick={handleLogout}>Logout</Button>
           </div>
           
           <Tweet refreshPosts={fetchPosts} />

@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import API from "../api";
 import Feed from "../components/Feed";
 import LeftSidebar from "../components/LeftSideBar";
+import WhoIsComing from "../components/WhoIsComing";
 
 export default function ProfilePage() {
   const { userId } = useParams();
@@ -144,6 +145,11 @@ export default function ProfilePage() {
                 </span>
               </div>
             )}
+
+            {/* Who is Coming button / panel */}
+            <div style={{ marginTop: "16px" }}>
+              <WhoIsComing userId={userId} />
+            </div>
           </div>
 
           {/* Posts Section */}

@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MainPage from "./pages/MainPage";
 import ProfilePage from "./pages/ProfilePage";
+import WhoIsComingPage from "./pages/WhoIsComingPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
@@ -14,6 +15,15 @@ function App() {
         element={
           <ProtectedRoutes>
             <MainPage />
+          </ProtectedRoutes>
+        } 
+      />
+
+      <Route 
+        path="/coming" 
+        element={
+          <ProtectedRoutes>
+            <WhoIsComingPage />
           </ProtectedRoutes>
         } 
       />
